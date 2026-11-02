@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="es" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copendium Tools - Herramientas Libres y Gratuitas</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Font: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#eefbf4',
+                            100: '#d7f6e4',
+                            200: '#b2ebd0',
+                            300: '#7cdab4',
+                            400: '#42c193',
+                            500: '#0e8a52', // Primary requested color
+                            600: '#097042',
+                            700: '#095937',
+                            800: '#0a472d',
+                            900: '#0a3b26',
+                            950: '#042115',
+                        },
+                        dark: {
+                            base: '#0b0f0d',
+                            card: '#131a16',
+                            border: '#1e2923',
+                            hover: '#19231d'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0b0f0d;
+            color: #e2e8f0;
+            font-family: 'Inter', sans-serif;
+        }
+        .glow-effect {
+            box-shadow: 0 0 50px -10px rgba(14, 138, 82, 0.25);
+        }
+        .glow-effect-lg {
+            box-shadow: 0 0 100px -20px rgba(14, 138, 82, 0.35);
+        }
+        .glass-nav {
+            background: rgba(11, 15, 13, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+        .glass-card {
+            background: linear-gradient(135deg, rgba(19, 26, 22, 0.8) 0%, rgba(14, 20, 17, 0.6) 100%);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(30, 41, 35, 0.8);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between antialiased selection:bg-brand-500 selection:text-white">
+
+    <!-- Navegación -->
+    <header class="sticky top-0 z-40 glass-nav border-b border-dark-border/60">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <!-- Mini Logo Copendium -->
+                <div class="w-8 h-8 rounded-lg bg-brand-500 flex items-center justify-center text-white font-bold text-lg shadow-sm">
+                    <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                    </svg>
+                </div>
+                <span class="font-bold text-lg tracking-tight text-white">Copendium <span class="text-brand-400">Tools</span></span>
+            </div>
+
+            <div class="flex items-center space-x-4">
+                <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-brand-500/10 text-brand-400 border border-brand-500/20">
+                    <span class="w-1.5 h-1.5 rounded-full bg-brand-400 mr-1.5 animate-pulse"></span>
+                    <span data-i18n="nav_badge">Software Libre & Gratuito</span>
+                </span>
+                <a href="#apps" class="hidden sm:inline-flex text-xs font-medium text-gray-400 hover:text-white transition-colors" data-i18n="nav_apps">
+                    Aplicaciones
+                </a>
+                <a href="#seguridad" class="hidden sm:inline-flex text-xs font-medium text-gray-400 hover:text-white transition-colors" data-i18n="nav_security">
+                    Seguridad
+                </a>
+
+                <!-- Selector de Idioma -->
+                <div class="relative inline-block text-left">
+                    <select id="languageSelect" onchange="changeLanguage(this.value)" class="bg-dark-card border border-dark-border text-gray-200 text-xs rounded-lg px-2.5 py-1.5 focus:ring-1 focus:ring-brand-500 focus:border-brand-500 outline-none cursor-pointer">
+                        <option value="es">🇪🇸 Español</option>
+                        <option value="en">🇺🇸 English</option>
+                        <option value="pt">🇧🇷 Português</option>
+                        <option value="fr">🇫🇷 Français</option>
+                        <option value="de">🇩🇪 Deutsch</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <main class="flex-grow">
+        <section class="relative pt-20 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
+            <!-- Background Radial Glow -->
+            <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-brand-500/15 rounded-full blur-[120px] pointer-events-none"></div>
+
+            <div class="max-w-4xl mx-auto text-center relative z-10">
+                <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-brand-950 border border-brand-500/30 text-brand-300 text-xs font-medium mb-6">
+                    <i class="fa-solid fa-code text-xs"></i>
+                    <span data-i18n="hero_pill">Código Abierto & Ecosistema Gratuito</span>
+                </div>
+                
+                <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white mb-6 leading-tight">
+                    <span data-i18n="hero_title_1">Herramientas de software</span> <br class="hidden sm:inline"/>
+                    <span class="bg-clip-text text-transparent bg-gradient-to-r from-brand-400 via-emerald-300 to-teal-200" data-i18n="hero_title_2">
+                        libres, transparentes y potentes.
+                    </span>
+                </h1>
+                
+                <p class="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed font-normal" data-i18n="hero_desc">
+                    Copendium Tools ofrece soluciones digitales gratuitas desarrolladas bajo la filosofía del código abierto. Sin publicidad intrusiva, sin rastreadores y sin costos ocultos.
+                </p>
+
+                <!-- Avisos rápidos de transparencia -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto text-left">
+                    <div class="p-4 rounded-xl glass-card">
+                        <div class="text-brand-400 text-lg mb-1"><i class="fa-solid fa-shield-halved"></i></div>
+                        <h3 class="text-sm font-semibold text-white" data-i18n="feat_1_title">100% Libre de Malware</h3>
+                        <p class="text-xs text-gray-400 mt-1" data-i18n="feat_1_desc">Código auditable y público sin binarios dañinos ni recolección de datos.</p>
+                    </div>
+                    <div class="p-4 rounded-xl glass-card">
+                        <div class="text-brand-400 text-lg mb-1"><i class="fa-solid fa-bolt"></i></div>
+                        <h3 class="text-sm font-semibold text-white" data-i18n="feat_2_title">Alto Rendimiento</h3>
+                        <p class="text-xs text-gray-400 mt-1" data-i18n="feat_2_desc">Aplicaciones ligeras diseñadas para ejecutarse con máxima fluidez.</p>
+                    </div>
+                    <div class="p-4 rounded-xl glass-card">
+                        <div class="text-brand-400 text-lg mb-1"><i class="fa-solid fa-coins"></i></div>
+                        <h3 class="text-sm font-semibold text-white" data-i18n="feat_3_title">Totalmente Gratis</h3>
+                        <p class="text-xs text-gray-400 mt-1" data-i18n="feat_3_desc">Acceso libre sin subscripciones ni pagos por características premium.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Destacado: Copendium Player -->
+        <section id="apps" class="py-12 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+            <div class="text-center sm:text-left mb-8 flex flex-col sm:flex-row items-center justify-between border-b border-dark-border pb-4">
+                <div>
+                    <h2 class="text-2xl font-bold text-white tracking-tight" data-i18n="apps_title">Aplicaciones Disponibles</h2>
+                    <p class="text-sm text-gray-400 mt-1" data-i18n="apps_subtitle">Descarga directa de nuestras aplicaciones principales.</p>
+                </div>
+                <span class="mt-2 sm:mt-0 text-xs px-3 py-1 rounded-full bg-dark-card border border-dark-border text-gray-400" data-i18n="apps_version">
+                    Versión Oficial 2026
+                </span>
+            </div>
+
+            <!-- Card Principal del Producto: Copendium Player -->
+            <div class="rounded-2xl glass-card border border-brand-500/30 p-6 sm:p-8 glow-effect relative overflow-hidden transition-all duration-300 hover:border-brand-500/50">
+                <!-- Badge Destacado -->
+                <div class="absolute top-0 right-0 bg-brand-500 text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-bl-lg" data-i18n="badge_featured">
+                    Destacado
+                </div>
+
+                <div class="flex flex-col md:flex-row items-center md:items-start gap-6 sm:gap-8">
+                    
+                    <!-- Icono App Copendium Player SVG idéntico a la imagen -->
+                    <div class="relative group flex-shrink-0">
+                        <div class="w-32 h-32 sm:w-36 sm:h-36 rounded-[28%] bg-brand-500 p-4 shadow-2xl flex items-center justify-center transform transition-transform group-hover:scale-105 duration-300 border border-white/10">
+                            <!-- SVG idéntico de la aplicación -->
+                            <svg class="w-full h-full text-white filter drop-shadow-md" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g fill="currentColor">
+                                    <rect x="37" y="27" width="7" height="42" rx="3.5" />
+                                    <rect x="63" y="19" width="7" height="38" rx="3.5" />
+                                    <polygon points="37,27 70,17 70,26 37,36" />
+                                    <polygon points="37,40 70,30 70,37 37,47" />
+                                    <circle cx="34" cy="65" r="9" />
+                                    <circle cx="34" cy="65" r="4.5" fill="#0e8a52" />
+                                    <circle cx="60" cy="53" r="9" />
+                                    <circle cx="60" cy="53" r="4.5" fill="#0e8a52" />
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Detalles del Producto -->
+                    <div class="flex-grow text-center md:text-left">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between gap-2">
+                            <div>
+                                <h3 class="text-2xl font-extrabold text-white">Copendium Player</h3>
+                                <p class="text-xs text-brand-400 font-mono mt-0.5">com.example.copendiumplayer • v1.0.0 (APK)</p>
+                            </div>
+                            <span class="inline-flex self-center md:self-start items-center px-2.5 py-0.5 rounded text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                                Android Ready
+                            </span>
+                        </div>
+
+                        <p class="text-gray-300 text-sm mt-3 leading-relaxed" data-i18n="player_desc">
+                            Un reproductor de audio moderno, ultra ligero y optimizado para brindar una experiencia de sonido pura. Diseñado sin rastreadores de fondo, enfocado al rendimiento máximo y con una interfaz limpia.
+                        </p>
+
+                        <!-- Aclaración de Seguridad Integrada en la Card -->
+                        <div class="mt-4 p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-200/90 text-xs flex items-start gap-3">
+                            <i class="fa-solid fa-triangle-exclamation text-amber-400 text-base flex-shrink-0 mt-0.5"></i>
+                            <div>
+                                <strong class="text-amber-300 font-semibold block mb-0.5" data-i18n="apk_warning_title">Nota importante sobre el archivo APK:</strong>
+                                <span data-i18n="apk_warning_body">Si tu dispositivo Android muestra una advertencia de "Aplicación no segura" o "Posible virus", se debe únicamente a que es un archivo <strong>APK sin firma digital de pago (Play Protect)</strong>. El código es 100% libre, transparente y totalmente seguro de instalar.</span>
+                            </div>
+                        </div>
+
+                        <!-- Botones de Acción -->
+                        <div class="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+                            <button onclick="openDownloadModal('stable')" class="px-5 py-3 rounded-xl bg-brand-500 hover:bg-brand-600 text-white font-semibold text-sm transition-all duration-200 shadow-lg shadow-brand-500/25 flex items-center justify-center gap-2 group">
+                                <i class="fa-solid fa-download group-hover:translate-y-0.5 transition-transform"></i>
+                                <span data-i18n="btn_download_stable">Descargar Copendium Player</span>
+                            </button>
+                            
+                            <button onclick="openDownloadModal('ai')" class="px-5 py-3 rounded-xl bg-dark-card hover:bg-dark-hover border border-brand-500/40 hover:border-brand-500 text-brand-300 font-semibold text-sm transition-all duration-200 flex items-center justify-center gap-2 group">
+                                <i class="fa-solid fa-wand-magic-sparkles text-brand-400 group-hover:rotate-12 transition-transform"></i>
+                                <span data-i18n="btn_download_ai">Descargar versión con funciones de IA (experimental)</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección Informativa de Seguridad & Transparencia -->
+        <section id="seguridad" class="py-12 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto mb-16">
+            <div class="p-6 sm:p-8 rounded-2xl bg-dark-card border border-dark-border">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 rounded-lg bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-400">
+                        <i class="fa-solid fa-shield-virus text-lg"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-white" data-i18n="sec_main_title">Transparencia y Advertencia de Firma</h3>
+                        <p class="text-xs text-gray-400" data-i18n="sec_main_subtitle">Por qué los navegadores o el sistema pueden mostrar alertas.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-gray-300 mt-4">
+                    <div class="space-y-3">
+                        <h4 class="font-semibold text-white text-base flex items-center gap-2">
+                            <i class="fa-solid fa-circle-question text-brand-400 text-xs"></i>
+                            <span data-i18n="sec_q1_title">¿Por qué salta la alerta de virus o riesgo?</span>
+                        </h4>
+                        <p class="text-xs leading-relaxed text-gray-400" data-i18n="sec_q1_desc">
+                            Para que Android o Windows no muestren avisos al instalar un archivo ejecutable, los desarrolladores deben pagar certificados de firma digital costosos. Como Copendium Tools es un proyecto independiente y 100% gratuito, publicamos el archivo compilado directamente (APK sin firma corporativa).
+                        </p>
+                    </div>
+
+                    <div class="space-y-3">
+                        <h4 class="font-semibold text-white text-base flex items-center gap-2">
+                            <i class="fa-solid fa-lock text-brand-400 text-xs"></i>
+                            <span data-i18n="sec_q2_title">Garantía de Código Seguro</span>
+                        </h4>
+                        <p class="text-xs leading-relaxed text-gray-400" data-i18n="sec_q2_desc">
+                            Garantizamos que el paquete no contiene ningún tipo de malware, spyware ni troyano. El ejecutable cumple estrictamente con su función de reproducción de audio sin solicitar permisos abusivos ni acceder a tus datos personales.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal de Descarga con Aviso de Seguridad -->
+    <div id="downloadModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="bg-dark-card border border-brand-500/40 rounded-2xl max-w-md w-full p-6 shadow-2xl transform scale-95 transition-transform duration-300 relative glow-effect" id="modalContent">
+            
+            <button onclick="closeDownloadModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="flex items-center space-x-3 mb-4">
+                <div class="w-10 h-10 rounded-xl bg-brand-500 flex items-center justify-center text-white flex-shrink-0">
+                    <i class="fa-solid fa-download"></i>
+                </div>
+                <div>
+                    <h3 class="font-bold text-white text-base" data-i18n="modal_title">Descargar Copendium Player</h3>
+                    <p class="text-xs text-brand-400" data-i18n="modal_subtitle">Archivo APK directo para Android</p>
+                </div>
+            </div>
+
+            <div class="space-y-3 bg-brand-950/40 border border-brand-500/20 p-4 rounded-xl text-xs text-gray-300 mb-6">
+                <div class="flex items-start gap-2">
+                    <i class="fa-solid fa-circle-info text-brand-400 text-sm flex-shrink-0 mt-0.5"></i>
+                    <div>
+                        <strong class="text-white" data-i18n="modal_warn_title">Aviso de seguridad del instalador:</strong>
+                        <p class="mt-1 text-gray-300" data-i18n="modal_warn_desc">
+                            Al ser un ejecutable APK sin firma digital de desarrollador paga, Android o Chrome pueden indicar un mensaje de aviso.
+                        </p>
+                    </div>
+                </div>
+                <div class="pt-2 border-t border-brand-500/10 text-[11px] text-gray-400" data-i18n="modal_check_list">
+                    ✔ El código es libre, seguro y está limpio de virus.<br>
+                    ✔ Puedes proceder con total confianza seleccionando "Instalar de todas formas".
+                </div>
+            </div>
+
+            <div class="flex flex-col gap-2">
+                <a id="directDownloadBtn" href="https://www.mediafire.com/file/si0j7rdfeqtzrk2/Copendium_Player.apk/fili" target="_blank" onclick="closeDownloadModal()" class="w-full py-3 rounded-xl bg-brand-500 hover:bg-brand-600 text-white font-semibold text-center text-sm shadow-md transition-colors flex items-center justify-center gap-2">
+                    <span data-i18n="modal_btn_confirm">Entendido, Continuar a la Descarga</span>
+                    <i class="fa-solid fa-arrow-right text-xs"></i>
+                </a>
+                <button onclick="closeDownloadModal()" class="w-full py-2.5 rounded-xl bg-transparent hover:bg-dark-hover text-gray-400 text-xs font-medium transition-colors" data-i18n="modal_btn_cancel">
+                    Cancelar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="border-t border-dark-border bg-dark-base py-8 px-4 sm:px-6 lg:px-8 text-xs text-gray-500">
+        <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center space-x-2">
+                <div class="w-5 h-5 rounded bg-brand-500 flex items-center justify-center text-white text-[10px] font-bold">C</div>
+                <span class="text-gray-300 font-medium">Copendium Tools</span>
+                <span>— <span data-i18n="footer_sub">Proyecto de Software Libre</span></span>
+            </div>
+            <p>© <span id="year"></span> Copendium Tools. <span data-i18n="footer_rights">Todos los derechos reservados.</span></p>
+        </div>
+    </footer>
+
+    <!-- Lógica JavaScript para Modales e Internacionalización (i18n) -->
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Enlaces de descarga por versión
+        const DOWNLOAD_LINKS = {
+            stable: "https://www.mediafire.com/file/si0j7rdfeqtzrk2/Copendium_Player.apk/fili",
+            ai: "https://www.mediafire.com/file/2uudc7zk19y9j38/Copendium_Player_Whit_IA.apk/file"
+        };
+
+        // Diccionario completo de traducciones (ES, EN, PT, FR, DE)
+        const translations = {
+            es: {
+                nav_badge: "Software Libre & Gratuito",
+                nav_apps: "Aplicaciones",
+                nav_security: "Seguridad",
+                hero_pill: "Código Abierto & Ecosistema Gratuito",
+                hero_title_1: "Herramientas de software",
+                hero_title_2: "libres, transparentes y potentes.",
+                hero_desc: "Copendium Tools ofrece soluciones digitales gratuitas desarrolladas bajo la filosofía del código abierto. Sin publicidad intrusiva, sin rastreadores y sin costos ocultos.",
+                feat_1_title: "100% Libre de Malware",
+                feat_1_desc: "Código auditable y público sin binarios dañinos ni recolección de datos.",
+                feat_2_title: "Alto Rendimiento",
+                feat_2_desc: "Aplicaciones ligeras diseñadas para ejecutarse con máxima fluidez.",
+                feat_3_title: "Totalmente Gratis",
+                feat_3_desc: "Acceso libre sin subscripciones ni pagos por características premium.",
+                apps_title: "Aplicaciones Disponibles",
+                apps_subtitle: "Descarga directa de nuestras aplicaciones principales.",
+                apps_version: "Versión Oficial 2026",
+                badge_featured: "Destacado",
+                player_desc: "Un reproductor de audio moderno, ultra ligero y optimizado para brindar una experiencia de sonido pura. Diseñado sin rastreadores de fondo, enfocado al rendimiento máximo y con una interfaz limpia.",
+                apk_warning_title: "Nota importante sobre el archivo APK:",
+                apk_warning_body: "Si tu dispositivo Android muestra una advertencia de \"Aplicación no segura\" o \"Posible virus\", se debe únicamente a que es un archivo APK sin firma digital de pago (Play Protect). El código es 100% libre, transparente y totalmente seguro de instalar.",
+                btn_download_stable: "Descargar Copendium Player",
+                btn_download_ai: "Descargar versión con funciones de IA (experimental)",
+                btn_learn_more: "Leer más sobre la firma y seguridad",
+                sec_main_title: "Transparencia y Advertencia de Firma",
+                sec_main_subtitle: "Por qué los navegadores o el sistema pueden mostrar alertas.",
+                sec_q1_title: "¿Por qué salta la alerta de virus o riesgo?",
+                sec_q1_desc: "Para que Android o Windows no muestren avisos al instalar un archivo ejecutable, los desarrolladores deben pagar certificados de firma digital costosos. Como Copendium Tools es un proyecto independiente y 100% gratuito, publicamos el archivo compilado directamente (APK sin firma corporativa).",
+                sec_q2_title: "Garantía de Código Seguro",
+                sec_q2_desc: "Garantizamos que el paquete no contiene ningún tipo de malware, spyware ni troyano. El ejecutable cumple estrictamente con su función de reproducción de audio sin solicitar permisos abusivos ni acceder a tus datos personales.",
+                modal_title: "Descargar Copendium Player",
+                modal_subtitle_stable: "Archivo APK Versión Estable para Android",
+                modal_subtitle_ai: "Archivo APK Versión Experimental con IA para Android",
+                modal_warn_title: "Aviso de seguridad del instalador:",
+                modal_warn_desc: "Al ser un ejecutable APK sin firma digital de desarrollador paga, Android o Chrome pueden indicar un mensaje de aviso.",
+                modal_check_list: "✔ El código es libre, seguro y está limpio de virus.<br>✔ Puedes proceder con total confianza seleccionando \"Instalar de todas formas\".",
+                modal_btn_confirm: "Entendido, Continuar a la Descarga",
+                modal_btn_cancel: "Cancelar",
+                footer_sub: "Proyecto de Software Libre",
+                footer_rights: "Todos los derechos reservados."
+            },
+            en: {
+                nav_badge: "Free & Open Source",
+                nav_apps: "Applications",
+                nav_security: "Security",
+                hero_pill: "Open Source & Free Ecosystem",
+                hero_title_1: "Software tools that are",
+                hero_title_2: "free, transparent, and powerful.",
+                hero_desc: "Copendium Tools offers free digital solutions developed under the open source philosophy. No intrusive ads, no trackers, and no hidden costs.",
+                feat_1_title: "100% Malware Free",
+                feat_1_desc: "Auditable public code with no harmful binaries or data collection.",
+                feat_2_title: "High Performance",
+                feat_2_desc: "Lightweight applications designed for maximum execution speed.",
+                feat_3_title: "Completely Free",
+                feat_3_desc: "Free access with no subscriptions or payments for premium features.",
+                apps_title: "Available Applications",
+                apps_subtitle: "Direct download of our core applications.",
+                apps_version: "Official 2026 Version",
+                badge_featured: "Featured",
+                player_desc: "A modern, ultra-lightweight audio player optimized for pure sound experience. Built without background trackers, focusing on peak performance and a clean interface.",
+                apk_warning_title: "Important note regarding the APK file:",
+                apk_warning_body: "If your Android device displays an \"Unsafe App\" or \"Potential Virus\" warning, it is solely because it is an unsigned APK without a paid commercial certificate (Play Protect). The codebase is 100% open, transparent, and completely safe to install.",
+                btn_download_stable: "Download Copendium Player",
+                btn_download_ai: "Download AI features version (experimental)",
+                btn_learn_more: "Read more about signature & security",
+                sec_main_title: "Transparency & Signature Warning",
+                sec_main_subtitle: "Why browsers or operating systems might display security prompts.",
+                sec_q1_title: "Why does a virus or risk warning appear?",
+                sec_q1_desc: "To prevent warning alerts when installing executables, developers must purchase expensive digital signing certificates. As Copendium Tools is an independent and 100% free project, we publish binaries directly without paid corporate signatures.",
+                sec_q2_title: "Guaranteed Safe Code",
+                sec_q2_desc: "We guarantee that the package contains zero malware, spyware, or trojans. The app strictly fulfills its audio playback purpose without requesting intrusive permissions or accessing your private data.",
+                modal_title: "Download Copendium Player",
+                modal_subtitle_stable: "Stable APK File for Android",
+                modal_subtitle_ai: "Experimental AI-Features APK File for Android",
+                modal_warn_title: "Installer security notification:",
+                modal_warn_desc: "Since this is an unsigned APK file without a paid developer certificate, Android or Chrome may show a security notice.",
+                modal_check_list: "✔ Code is open source, safe, and clean of viruses.<br>✔ You can proceed with total confidence by selecting \"Install anyway\".",
+                modal_btn_confirm: "Understood, Proceed to Download",
+                modal_btn_cancel: "Cancel",
+                footer_sub: "Open Source Project",
+                footer_rights: "All rights reserved."
+            },
+            pt: {
+                nav_badge: "Software Livre & Gratuito",
+                nav_apps: "Aplicações",
+                nav_security: "Segurança",
+                hero_pill: "Código Aberto & Ecossistema Gratuito",
+                hero_title_1: "Ferramentas de software",
+                hero_title_2: "livres, transparentes e potentes.",
+                hero_desc: "O Copendium Tools oferece soluções digitais gratuitas desenvolvidas sob a filosofia de código aberto. Sem anúncios intrusivos, sem rastreadores e sem custos ocultos.",
+                feat_1_title: "100% Livre de Malware",
+                feat_1_desc: "Código auditável e público, sem binários nocivos nem coleta de dados.",
+                feat_2_title: "Alto Desempenho",
+                feat_2_desc: "Aplicativos leves projetados para execução rápida e fluida.",
+                feat_3_title: "Totalmente Grátis",
+                feat_3_desc: "Acesso livre sem assinaturas nem pagamentos por recursos premium.",
+                apps_title: "Aplicações Disponíveis",
+                apps_subtitle: "Download direto de nossas aplicações principais.",
+                apps_version: "Versão Oficial 2026",
+                badge_featured: "Destaque",
+                player_desc: "Um reprodutor de áudio moderno, ultra leve e otimizado para proporcionar uma experiência sonora pura. Criado sem rastreadores em segundo plano, focado em alto rendimento.",
+                apk_warning_title: "Nota importante sobre o arquivo APK:",
+                apk_warning_body: "Se o seu dispositivo Android exibir um aviso de \"Aplicativo não seguro\" ou \"Possível vírus\", isso ocorre apenas porque é um arquivo APK sem assinatura digital paga (Play Protect). O código é 100% livre e seguro.",
+                btn_download_stable: "Baixar Copendium Player",
+                btn_download_ai: "Baixar versão com funções de IA (experimental)",
+                btn_learn_more: "Ler mais sobre assinatura e segurança",
+                sec_main_title: "Transparência e Aviso de Assinatura",
+                sec_main_subtitle: "Por que navegadores ou o sistema podem exibir alertas.",
+                sec_q1_title: "Por que o alerta de vírus ou risco é exibido?",
+                sec_q1_desc: "Para evitar avisos de segurança, desenvolvedores precisam pagar certificados digitais caros. Como o Copendium Tools é um projeto independente e 100% gratuito, publicamos o APK compilado diretamente sem assinatura corporativa.",
+                sec_q2_title: "Garantia de Código Seguro",
+                sec_q2_desc: "Garantimos que o pacote não contém malware, spyware ou trojans. O aplicativo cumpre estritamente sua função de reprodução de áudio sem solicitar permissões abusivas.",
+                modal_title: "Baixar Copendium Player",
+                modal_subtitle_stable: "Arquivo APK Versão Estável para Android",
+                modal_subtitle_ai: "Arquivo APK Versão Experimental com IA para Android",
+                modal_warn_title: "Aviso de segurança do instalador:",
+                modal_warn_desc: "Por ser um APK sem assinatura paga de desenvolvedor, o Android ou Chrome podem exibir uma mensagem de alerta.",
+                modal_check_list: "✔ O código é livre, seguro e limpo de vírus.<br>✔ Você pode prosseguir com total confiança selecionando \"Instalar assim mesmo\".",
+                modal_btn_confirm: "Entendido, Continuar para Download",
+                modal_btn_cancel: "Cancelar",
+                footer_sub: "Projeto de Software Livre",
+                footer_rights: "Todos os direitos reservados."
+            },
+            fr: {
+                nav_badge: "Logiciel Libre & Gratuit",
+                nav_apps: "Applications",
+                nav_security: "Sécurité",
+                hero_pill: "Open Source & Écosystème Gratuit",
+                hero_title_1: "Des outils logiciels",
+                hero_title_2: "libres, transparents et puissants.",
+                hero_desc: "Copendium Tools propose des solutions numériques gratuites développées selon la philosophie open source. Sans publicité intrusive, sans traqueurs et sans coûts cachés.",
+                feat_1_title: "100% Sans Malware",
+                feat_1_desc: "Code public et auditable, sans fichiers binaires nocifs ni collecte de données.",
+                feat_2_title: "Haute Performance",
+                feat_2_desc: "Applications légères conçues pour une exécution ultra-fluide.",
+                feat_3_title: "Totalement Gratuit",
+                feat_3_desc: "Accès libre sans abonnements ni frais pour des fonctionnalités premium.",
+                apps_title: "Applications Disponibles",
+                apps_subtitle: "Téléchargement direct de nos principales applications.",
+                apps_version: "Version Officielle 2026",
+                badge_featured: "En vedette",
+                player_desc: "Un lecteur audio moderne, ultra-léger et optimisé pour offrir une pure expérience sonore. Conçu sans traqueurs en arrière-plan, axé sur les performances maximales.",
+                apk_warning_title: "Note importante concernant le fichier APK:",
+                apk_warning_body: "Si votre appareil Android affiche un avertissement de \"Application non sécurisée\" ou \"Virus potentiel\", c'est uniquement parce qu'il s'agit d'un fichier APK sans signature numérique payante (Play Protect). Le code est 100% libre et sûr.",
+                btn_download_stable: "Télécharger Copendium Player",
+                btn_download_ai: "Télécharger version avec fonctionnalités IA (expérimental)",
+                btn_learn_more: "En savoir plus sur la signature et la sécurité",
+                sec_main_title: "Transparence & Avertissement de Signature",
+                sec_main_subtitle: "Pourquoi les navigateurs ou les systèmes peuvent afficher des alertes.",
+                sec_q1_title: "Pourquoi une alerte de risque apparaît-elle ?",
+                sec_q1_desc: "Pour éviter les avertissements lors de l'installation, les développeurs doivent acheter des certificats numériques coûteux. Copendium Tools étant un projet indépendant et 100% gratuit, nous publions directement les exécutables sans signature payante.",
+                sec_q2_title: "Garantie de Code Sûr",
+                sec_q2_desc: "Nous garantissons que le paquet ne contient aucun logiciel malveillant, spyware ou trojan. Le lecteur remplit uniquement sa fonction audio sans solliciter d'autorisations abusives.",
+                modal_title: "Télécharger Copendium Player",
+                modal_subtitle_stable: "Fichier APK Version Stable pour Android",
+                modal_subtitle_ai: "Fichier APK Version Expérimentale IA pour Android",
+                modal_warn_title: "Avis de sécurité de l'installateur :",
+                modal_warn_desc: "S'agissant d'un fichier APK non signé par un certificat payant, Android ou Chrome peuvent afficher un message d'avertissement.",
+                modal_check_list: "✔ Le code est libre, sûr et sans virus.<br>✔ Vous pouvez continuer en toute confiance en sélectionnant \"Installer quand même\".",
+                modal_btn_confirm: "Compris, Continuer le Téléchargement",
+                modal_btn_cancel: "Annuler",
+                footer_sub: "Projet Open Source",
+                footer_rights: "Tous droits réservés."
+            },
+            de: {
+                nav_badge: "Kostenlos & Open Source",
+                nav_apps: "Anwendungen",
+                nav_security: "Sicherheit",
+                hero_pill: "Open Source & Kostenloses Ökosystem",
+                hero_title_1: "Software-Werkzeuge,",
+                hero_title_2: "die frei, transparent und leistungsstark sind.",
+                hero_desc: "Copendium Tools bietet kostenlose digitale Lösungen auf Basis der Open-Source-Philosophie. Keine störende Werbung, keine Tracker und keine versteckten Kosten.",
+                feat_1_title: "100% Frei von Malware",
+                feat_1_desc: "Prüfbarer öffentlicher Code ohne schädliche Dateien oder Datenerfassung.",
+                feat_2_title: "Hohe Leistung",
+                feat_2_desc: "Leichtgewichtige Anwendungen für maximale Ausführungsgeschwindigkeit.",
+                feat_3_title: "Vollständig Kostenlos",
+                feat_3_desc: "Freier Zugriff ohne Abonnements oder Zahlungen für Premium-Funktionen.",
+                apps_title: "Verfügbare Anwendungen",
+                apps_subtitle: "Direkter Download unserer Hauptanwendungen.",
+                apps_version: "Offizielle Version 2026",
+                badge_featured: "Empfohlen",
+                player_desc: "Ein moderner, ultraleichter Audioplayer, optimiert für ein reines Klangerlebnis. Entwickelt ohne Hintergrund-Tracker mit Fokus auf Höchstleistung und ein aufgeräumtes Design.",
+                apk_warning_title: "Wichtiger Hinweis zur APK-Datei:",
+                apk_warning_body: "Wenn Ihr Android-Gerät eine Warnung vor einer \"Unsicheren App\" oder einem \"Möglichen Virus\" anzeigt, liegt das nur daran, dass die APK-Datei ohne kostenpflichtiges digitales Zertifikat (Play Protect) signiert ist. Der Code ist 100% frei und sicher.",
+                btn_download_stable: "Copendium Player Herunterladen",
+                btn_download_ai: "Version mit KI-Funktionen herunterladen (experimentell)",
+                btn_learn_more: "Mehr über Signatur & Sicherheit erfahren",
+                sec_main_title: "Transparenz & Signaturhinweis",
+                sec_main_subtitle: "Warum Browser oder das Betriebssystem Warnungen anzeigen können.",
+                sec_q1_title: "Warum erscheint ein Virus- oder Risikohinweis?",
+                sec_q1_desc: "Um Warnmeldungen bei der Installation zu vermeiden, müssen Entwickler teure digitale Signaturzertifikate erwerben. Da Copendium Tools ein unabhängiges und 100% kostenloses Projekt ist, veröffentlichen wir die APK direkt ohne kommerzielle Signatur.",
+                sec_q2_title: "Garantie für Sicheren Code",
+                sec_q2_desc: "Wir garantieren, dass das Paket keinerlei Malware, Spyware oder Trojaner enthält. Die Anwendung erfüllt ausschließlich ihre Audio-Wiedergabefunktion ohne unberechtigte Zugriffe.",
+                modal_title: "Copendium Player Herunterladen",
+                modal_subtitle_stable: "Stabile APK-Datei für Android",
+                modal_subtitle_ai: "Experimentelle KI-APK-Datei für Android",
+                modal_warn_title: "Sicherheitshinweis des Installers:",
+                modal_warn_desc: "Da es sich um eine APK ohne kostenpflichtige Entwicklersignatur handelt, zeigen Android oder Chrome eventuell einen Sicherheitshinweis an.",
+                modal_check_list: "✔ Der Code ist Open Source, sicher und virenfrei.<br>✔ Sie können bedenkenlos fortfahren, indem Sie \"Trotzdem installieren\" wählen.",
+                modal_btn_confirm: "Verstanden, Zum Download Fortfahren",
+                modal_btn_cancel: "Abbrechen",
+                footer_sub: "Open-Source-Projekt",
+                footer_rights: "Alle Rechte vorbehalten."
+            }
+        };
+
+        function changeLanguage(lang) {
+            if (!translations[lang]) return;
+            const t = translations[lang];
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (t[key]) {
+                    el.innerHTML = t[key];
+                }
+            });
+
+            // Guardar preferencia del usuario
+            localStorage.setItem('copendium_lang', lang);
+        }
+
+        // Cargar idioma guardado o por defecto
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('copendium_lang') || 'es';
+            const selectEl = document.getElementById('languageSelect');
+            if (selectEl) selectEl.value = savedLang;
+            changeLanguage(savedLang);
+        });
+
+        // Modales
+        const modal = document.getElementById('downloadModal');
+        const modalContent = document.getElementById('modalContent');
+        const directDownloadBtn = document.getElementById('directDownloadBtn');
+
+        function openDownloadModal(type = 'stable') {
+            const link = DOWNLOAD_LINKS[type] || DOWNLOAD_LINKS.stable;
+            directDownloadBtn.href = link;
+
+            // Actualizar subtítulo del modal según la versión elegida y el idioma actual
+            const currentLang = localStorage.getItem('copendium_lang') || 'es';
+            const t = translations[currentLang] || translations.es;
+            const subtitleEl = modal.querySelector('[data-i18n="modal_subtitle"]');
+            
+            if (subtitleEl) {
+                subtitleEl.innerHTML = (type === 'ai') ? t.modal_subtitle_ai : t.modal_subtitle_stable;
+            }
+
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.classList.add('opacity-100');
+            modalContent.classList.remove('scale-95');
+            modalContent.classList.add('scale-100');
+        }
+
+        function closeDownloadModal() {
+            modal.classList.remove('opacity-100');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modalContent.classList.remove('scale-100');
+            modalContent.classList.add('scale-95');
+        }
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeDownloadModal();
+            }
+        });
+    </script>
+</body>
+</html>
